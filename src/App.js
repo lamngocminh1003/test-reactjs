@@ -1,7 +1,14 @@
 import "./App.scss";
+import Header from "./components/Header";
+import TableUsers from "./components/TableUsers";
 
 function App() {
-  return <div className="body">Hello word</div>;
+  return (
+    <div className="app-container">
+      <Header />
+      <TableUsers />
+    </div>
+  );
 }
 
 export default App;
