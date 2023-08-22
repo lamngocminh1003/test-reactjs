@@ -25,11 +25,13 @@ const TableUsers = (props) => {
       setListUser([]);
     }
   };
-
+  const handleUpdateTable = (user) => {
+    setListUser([user, ...listUsers]);
+  };
   return (
     <div>
       <div className="mt-5 pt-3 title">Manage users</div>
-      <ModalAddNewUser />
+      <ModalAddNewUser handleUpdateTable={handleUpdateTable} />
       <Table striped bordered hover variant="light">
         <thead>
           <tr>
