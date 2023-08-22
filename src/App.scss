@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.app-container {
+  .title {
+    font-size: 30px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 600;
+    color: cornflowerblue;
+  }
+}

@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import { fetchAllUser } from "../components/Services/UserService";
 import ReactPaginate from "react-paginate";
+import Paginate from "./Paginate";
+import { Modal } from "bootstrap";
+import ModalAddNewUser from "./ModalAddNewUser";
 
 const TableUsers = (props) => {
   useEffect(() => {
@@ -22,11 +25,11 @@ const TableUsers = (props) => {
       setListUser([]);
     }
   };
-  const handlePageClick = (event) => {
-    getAllUsers(+event.selected + 1);
-  };
+
   return (
     <div>
+      <div className="mt-5 pt-3 title">Manage users</div>
+      <ModalAddNewUser />
       <Table striped bordered hover variant="light">
         <thead>
           <tr>
@@ -51,27 +54,7 @@ const TableUsers = (props) => {
             })}
         </tbody>
       </Table>
-      <div>
-        <ReactPaginate
-          breakLabel="..."
-          nextLabel="next >"
-          onPageChange={handlePageClick}
-          pageRangeDisplayed={5}
-          pageCount={totalPages}
-          previousLabel="< previous"
-          renderOnZeroPageCount={null}
-          pageClassName="page-item"
-          pageLinkClassName="page-link"
-          previousClassName="page-item"
-          previousLinkClassName="page-link"
-          nextClassName="page-item"
-          nextLinkClassName="page-link"
-          breakClassName="page-item"
-          breakLinkClassName="page-link"
-          containerClassName="pagination"
-          activeClassName="active"
-        />
-      </div>
+      <Paginate totalPages={totalPages} getAllUsers={getAllUsers} />
     </div>
   );
 };
