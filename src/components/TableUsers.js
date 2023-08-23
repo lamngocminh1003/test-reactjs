@@ -18,7 +18,8 @@ const TableUsers = (props) => {
   const [showEdit, setShowEdit] = useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const [dataUsers, setDataUser] = useState({});
-
+  const [sortBy, setSortBy] = useState("asc");
+  const [sortField, setSortField] = useState("id");
   const getAllUsers = async (page) => {
     let res = await fetchAllUser(page);
     if (res && res.data) {
@@ -38,7 +39,6 @@ const TableUsers = (props) => {
     listUsersCopy[index].first_name = user.first_name;
     setListUser(listUsersCopy);
   };
-
   const handleEditUser = (user) => {
     setShowEdit(true);
     setDataUser(user);
@@ -50,6 +50,13 @@ const TableUsers = (props) => {
   const handleDeleteFromModal = (user) => {
     let listUsersCopy = _.cloneDeep(listUsers);
     listUsersCopy = listUsersCopy.filter((item) => item.id !== user.id);
+    setListUser(listUsersCopy);
+  };
+  const handleSort = (sortBy, sortField) => {
+    setSortBy(sortBy);
+    setSortField(sortField);
+    let listUsersCopy = _.cloneDeep(listUsers);
+    listUsersCopy = _.orderBy(listUsersCopy, [sortField], [sortBy]);
     setListUser(listUsersCopy);
   };
   return (
@@ -71,8 +78,34 @@ const TableUsers = (props) => {
       <Table striped bordered hover variant="light">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>First Name</th>
+            <th className="d-flex flex-row justify-content-center align-items-center gap-2">
+              ID
+              <span className="d-flex flex-row gap-1">
+                <i
+                  onClick={() => handleSort("asc", "id")}
+                  className="fa-solid fa-arrow-up-long  text-primary cursor-pointer	"
+                ></i>
+                <i
+                  onClick={() => handleSort("desc", "id")}
+                  className="fa-solid fa-arrow-down-long text-info cursor-pointer	"
+                ></i>
+              </span>
+            </th>
+            <th>
+              <span className="d-flex flex-row justify-content-center align-items-center gap-2">
+                First Name
+                <span className="d-flex flex-row gap-1">
+                  <i
+                    onClick={() => handleSort("asc", "first_name")}
+                    className="fa-solid fa-arrow-up-long text-primary cursor-pointer	"
+                  ></i>
+                  <i
+                    onClick={() => handleSort("desc", "first_name")}
+                    className="fa-solid fa-arrow-down-long text-info cursor-pointer	"
+                  ></i>
+                </span>
+              </span>
+            </th>
             <th>Last name</th>
             <th>Email</th>
             <th className="text-center">Action</th>
@@ -93,13 +126,13 @@ const TableUsers = (props) => {
                       className="btn btn-warning"
                       onClick={() => handleEditUser(item)}
                     >
-                      Edit
+                      <i className="fa-solid fa-user-pen text-white"></i>
                     </button>
                     <button
                       className="btn btn-danger"
                       onClick={() => handleDeleteUser(item)}
                     >
-                      Delete
+                      <i className="fa-solid fa-trash"></i>
                     </button>
                   </td>
                 </tr>

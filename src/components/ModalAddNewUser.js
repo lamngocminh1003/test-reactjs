@@ -40,6 +40,9 @@ const ModalAddNewUser = (props) => {
   return (
     <>
       <Button variant="primary" className="mb-3" onClick={handleShow}>
+        <span>
+          <i className="fa-solid fa-user-plus me-2"></i>
+        </span>
         Add new user
       </Button>
 
