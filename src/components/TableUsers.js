@@ -5,6 +5,7 @@ import Paginate from "./Paginate";
 import ModalAddNewUser from "./ModalAddNewUser";
 import ModalEditUser from "./ModalEditUser";
 import ModalDeleteUser from "./ModalDeleteUser";
+import SearchByEmail from "./SearchByEmail";
 import _ from "lodash";
 
 const TableUsers = (props) => {
@@ -20,6 +21,7 @@ const TableUsers = (props) => {
   const [dataUsers, setDataUser] = useState({});
   const [sortBy, setSortBy] = useState("asc");
   const [sortField, setSortField] = useState("id");
+
   const getAllUsers = async (page) => {
     let res = await fetchAllUser(page);
     if (res && res.data) {
@@ -74,6 +76,11 @@ const TableUsers = (props) => {
         showDelete={showDelete}
         dataUsers={dataUsers}
         handleDeleteFromModal={handleDeleteFromModal}
+      />
+      <SearchByEmail
+        getAllUsers={getAllUsers}
+        listUsers={listUsers}
+        setListUser={setListUser}
       />
       <Table striped bordered hover variant="light">
         <thead>
