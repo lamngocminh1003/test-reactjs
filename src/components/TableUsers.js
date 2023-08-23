@@ -47,6 +47,11 @@ const TableUsers = (props) => {
     setShowDelete(true);
     setDataUser(user);
   };
+  const handleDeleteFromModal = (user) => {
+    let listUsersCopy = _.cloneDeep(listUsers);
+    listUsersCopy = listUsersCopy.filter((item) => item.id !== user.id);
+    setListUser(listUsersCopy);
+  };
   return (
     <div>
       <div className="mt-5 pt-3 title">Manage users</div>
@@ -61,6 +66,7 @@ const TableUsers = (props) => {
         setShowDelete={setShowDelete}
         showDelete={showDelete}
         dataUsers={dataUsers}
+        handleDeleteFromModal={handleDeleteFromModal}
       />
       <Table striped bordered hover variant="light">
         <thead>

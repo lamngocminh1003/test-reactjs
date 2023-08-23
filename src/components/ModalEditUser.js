@@ -45,7 +45,7 @@ const ModalEditUser = (props) => {
   }, [dataUsers]);
   return (
     <>
-      <Modal show={showEdit} onHide={handleClose}>
+      <Modal backdrop="static" show={showEdit} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title className="fs-6 text-uppercase text-primary">
             Edit user

@@ -43,7 +43,7 @@ const ModalAddNewUser = (props) => {
         Add new user
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal backdrop="static" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title className="fs-6 text-uppercase text-primary">
             Add new user

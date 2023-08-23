@@ -3,82 +3,53 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
 import _ from "lodash";
-import { createNewUser } from "./Services/UserService";
+import { deleteUser } from "./Services/UserService";
 const ModalDeleteUser = (props) => {
   const [job, setJob] = useState("");
   const [name, setName] = useState("");
-  let { handleUpdateTable, setShowDelete, showDelete } = props;
+  let { handleDeleteFromModal, setShowDelete, showDelete, dataUsers } = props;
   const handleClose = () => setShowDelete(false);
   const handleShow = () => setShowDelete(true);
-  const handleOnClickEdit = async () => {
-    if (!name && !job) {
-      toast.error("Invalid name & job!");
-      return;
-    }
-    if (!name) {
-      toast.error("Invalid name!");
-      return;
-    }
-    if (!job) {
-      toast.error("Invalid job!");
-      return;
-    }
-
-    let res = await createNewUser(name, job);
-    if (res && res.id) {
+  const [id, setId] = useState("");
+  const handleOnClickDelete = async () => {
+    let res = await deleteUser(id);
+    if (res && res.statusCode === 204) {
       //success
       setShowDelete(false);
-      setName("");
-      setJob("");
-      toast.success("Add new user successfully");
-      handleUpdateTable({ first_name: name, id: res.id });
+      toast.success("Delete user successfully");
+      handleDeleteFromModal(dataUsers);
+    } else {
+      toast.error("Delete user error");
     }
   };
-
+  useEffect(() => {
+    if (showDelete) {
+      setName(dataUsers.first_name);
+      setId(dataUsers.id);
+    }
+  }, [dataUsers]);
   return (
     <>
-      <Modal show={showDelete} onHide={handleClose}>
+      <Modal show={showDelete} onHide={handleClose} backdrop="static">
         <Modal.Header closeButton>
           <Modal.Title className="fs-6 text-uppercase text-primary">
             Delete user
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <input type="text" className="form-control" value={id} hidden />
           <div className="input-group mb-3">
             <span className="input-group-text" id="inputGroup-sizing-default">
-              Name
+              Do you want to delete {name}'s user
             </span>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter your name"
-              value={name}
-              onChange={(event) => {
-                setName(event.target.value);
-              }}
-            />
-          </div>
-          <div className="input-group mb-3">
-            <span className="input-group-text" id="inputGroup-sizing-default">
-              Job
-            </span>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter your job"
-              value={job}
-              onChange={(event) => {
-                setJob(event.target.value);
-              }}
-            />
           </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Cancel
           </Button>
-          <Button variant="primary" onClick={() => handleOnClickEdit()}>
-            Conform
+          <Button variant="primary" onClick={() => handleOnClickDelete()}>
+            Delete
           </Button>
         </Modal.Footer>
       </Modal>
