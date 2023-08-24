@@ -6,6 +6,9 @@ import ModalAddNewUser from "./ModalAddNewUser";
 import ModalEditUser from "./ModalEditUser";
 import ModalDeleteUser from "./ModalDeleteUser";
 import SearchByEmail from "./SearchByEmail";
+import ImportCSV from "./ImportCSV";
+import ExportCSV from "./ExportCSV";
+
 import _ from "lodash";
 
 const TableUsers = (props) => {
@@ -64,7 +67,12 @@ const TableUsers = (props) => {
   return (
     <div>
       <div className="mt-5 pt-3 title">Manage users</div>
-      <ModalAddNewUser handleUpdateTable={handleUpdateTable} />
+      <div className="d-flex gap-3">
+        <ModalAddNewUser handleUpdateTable={handleUpdateTable} />
+        <ImportCSV setListUser={setListUser} />
+        <ExportCSV listUsers={listUsers} />
+      </div>
+
       <ModalEditUser
         setShowEdit={setShowEdit}
         showEdit={showEdit}

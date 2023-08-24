@@ -31,11 +31,6 @@ const SearchByEmail = (props) => {
             handleSearch(event.target.value);
           }}
         />
-        <span className="input-group-text">
-          <button className="btn btn-info text-white">
-            <i className="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </span>
       </div>
     </div>
   );
