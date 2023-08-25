@@ -25,4 +25,53 @@ code {
   .btn-import {
     height: 38px;
   }
+  .home {
+    margin: 0 30px 0 50px;
+    .request {
+      font-weight: 500;
+      font-size: 20px;
+    }
+  }
+  .login-container {
+    display: flex;
+    justify-content: center;
+    .login-form {
+      width: 50%;
+      max-width: 400px;
+      min-width: 300px;
+      .input-password {
+        position: relative;
+        .fa-eye-slash,
+        .fa-eye {
+          position: absolute;
+          top: 30%;
+          left: 90%;
+        }
+      }
+      .btn-login {
+        width: 100%;
+        background-color: #e0d3d3;
+        color: #b3a8a8;
+        font-weight: 500;
+        &.active {
+          background-color: #d73939;
+          color: #e2dbdb;
+        }
+      }
+      button[disabled="disabled"],
+      button:disabled {
+        cursor: pointer;
+      }
+      .back-home {
+        text-align: center;
+        .back-text {
+          font-weight: 600;
+          &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
 }

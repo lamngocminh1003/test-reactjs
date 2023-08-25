@@ -57,7 +57,7 @@ const ImportCSV = (props) => {
         type="button"
       >
         <span>
-          <i class="fa-solid fa-file-import me-2"></i>
+          <i className="fa-solid fa-file-import me-2"></i>
         </span>
         Import
       </label>

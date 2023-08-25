@@ -29,7 +29,7 @@ const ExportCSV = (props) => {
         onClick={(event, done) => getAllUsersExport(event, done)}
       >
         <span className="me-1">
-          <i class="fa-solid fa-download"></i>{" "}
+          <i className="fa-solid fa-download"></i>{" "}
         </span>
         Export
       </CSVLink>
