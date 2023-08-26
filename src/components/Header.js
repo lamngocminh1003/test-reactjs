@@ -40,18 +40,15 @@ const Header = (props) => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="me-auto">
-                {(user && user.email && user.auth === false) ||
-                  (window.location.pathname === "/" && (
-                    <>
-                      <NavLink to="/" className="nav-link">
-                        Home
-                      </NavLink>
-                    </>
-                  ))}
+                <NavLink to="/" className="nav-link">
+                  Home
+                </NavLink>
                 {user && user.email && user.auth === true && (
-                  <NavLink to="/users" className="nav-link">
-                    Manage Users
-                  </NavLink>
+                  <>
+                    <NavLink to="/user" className="nav-link">
+                      Manage Users
+                    </NavLink>
+                  </>
                 )}
               </Nav>
               <Nav>

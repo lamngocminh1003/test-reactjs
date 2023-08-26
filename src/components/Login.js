@@ -27,7 +27,7 @@ const Login = () => {
       toast.error("Invalid email & password!");
     }
     setIsShowLoading(true);
-    let res = await loginAPI(email, password);
+    let res = await loginAPI(email.replace(), password);
     if (res && res.token) {
       loginContext(email, res.token);
       toast.success("Login successfully!");
@@ -38,6 +38,11 @@ const Login = () => {
       }
     }
     setIsShowLoading(false);
+  };
+  const handlePressEnter = (event) => {
+    if (event && event.keyCode === 13) {
+      handleLogin();
+    }
   };
   return (
     <div className="mt-5 pt-5 login-container ">
@@ -66,6 +71,7 @@ const Login = () => {
               onChange={(event) => {
                 setPassword(event.target.value);
               }}
+              onKeyDown={(event) => handlePressEnter(event)}
             />
             <i
               className={

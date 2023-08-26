@@ -90,72 +90,76 @@ const TableUsers = (props) => {
         listUsers={listUsers}
         setListUser={setListUser}
       />
-      <Table striped bordered hover variant="light">
-        <thead>
-          <tr>
-            <th className="d-flex flex-row justify-content-center align-items-center gap-2">
-              ID
-              <span className="d-flex flex-row gap-1">
-                <i
-                  onClick={() => handleSort("asc", "id")}
-                  className="fa-solid fa-arrow-up-long  text-primary cursor-pointer	"
-                ></i>
-                <i
-                  onClick={() => handleSort("desc", "id")}
-                  className="fa-solid fa-arrow-down-long text-info cursor-pointer	"
-                ></i>
-              </span>
-            </th>
-            <th>
-              <span className="d-flex flex-row justify-content-center align-items-center gap-2">
-                First Name
+      <div className="table-container">
+        <Table striped bordered hover variant="light">
+          <thead>
+            <tr>
+              <th className="d-flex flex-row justify-content-center align-items-center gap-2">
+                ID
                 <span className="d-flex flex-row gap-1">
                   <i
-                    onClick={() => handleSort("asc", "first_name")}
-                    className="fa-solid fa-arrow-up-long text-primary cursor-pointer	"
+                    onClick={() => handleSort("asc", "id")}
+                    className="fa-solid fa-arrow-up-long  text-primary cursor-pointer	"
                   ></i>
                   <i
-                    onClick={() => handleSort("desc", "first_name")}
+                    onClick={() => handleSort("desc", "id")}
                     className="fa-solid fa-arrow-down-long text-info cursor-pointer	"
                   ></i>
                 </span>
-              </span>
-            </th>
-            <th>Last name</th>
-            <th>Email</th>
-            <th className="text-center">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {listUsers &&
-            listUsers.length > 0 &&
-            listUsers.map((item, index) => {
-              return (
-                <tr key={`user-${index}`}>
-                  <td>{index + 1}</td>
-                  <td>{item.first_name}</td>
-                  <td>{item.last_name}</td>
-                  <td>{item.email}</td>
-                  <td className="d-flex justify-content-evenly gap-3 ">
-                    <button
-                      className="btn btn-warning"
-                      onClick={() => handleEditUser(item)}
-                    >
-                      <i className="fa-solid fa-user-pen text-white"></i>
-                    </button>
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => handleDeleteUser(item)}
-                    >
-                      <i className="fa-solid fa-trash"></i>
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </Table>
-      <Paginate totalPages={totalPages} getAllUsers={getAllUsers} />
+              </th>
+              <th>
+                <span className="d-flex flex-row justify-content-center align-items-center gap-2">
+                  First Name
+                  <span className="d-flex flex-row gap-1">
+                    <i
+                      onClick={() => handleSort("asc", "first_name")}
+                      className="fa-solid fa-arrow-up-long text-primary cursor-pointer	"
+                    ></i>
+                    <i
+                      onClick={() => handleSort("desc", "first_name")}
+                      className="fa-solid fa-arrow-down-long text-info cursor-pointer	"
+                    ></i>
+                  </span>
+                </span>
+              </th>
+              <th>Last name</th>
+              <th>Email</th>
+              <th className="text-center">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {listUsers &&
+              listUsers.length > 0 &&
+              listUsers.map((item, index) => {
+                return (
+                  <tr key={`user-${index}`}>
+                    <td>{index + 1}</td>
+                    <td>{item.first_name}</td>
+                    <td>{item.last_name}</td>
+                    <td>{item.email}</td>
+                    <td className="d-flex justify-content-evenly gap-3 ">
+                      <button
+                        className="btn btn-warning"
+                        onClick={() => handleEditUser(item)}
+                      >
+                        <i className="fa-solid fa-user-pen text-white"></i>
+                      </button>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => handleDeleteUser(item)}
+                      >
+                        <i className="fa-solid fa-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </Table>
+      </div>
+      <div className="paginate">
+        <Paginate totalPages={totalPages} getAllUsers={getAllUsers} />
+      </div>
     </div>
   );
 };

@@ -43,7 +43,7 @@ const ModalAddNewUser = (props) => {
         <span>
           <i className="fa-solid fa-user-plus me-2"></i>
         </span>
-        Add new user
+        Add new
       </Button>
 
       <Modal backdrop="static" show={show} onHide={handleClose}>

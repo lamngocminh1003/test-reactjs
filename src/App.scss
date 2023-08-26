@@ -32,6 +32,7 @@ code {
       font-size: 20px;
     }
   }
+
   .login-container {
     display: flex;
     justify-content: center;
@@ -74,4 +75,12 @@ code {
       }
     }
   }
+}
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+.paginate {
+  display: flex;
+  justify-content: center;
 }
