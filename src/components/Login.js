@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { loginAPI } from "./Services/UserService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
 
 const Login = () => {
   const navigate = useNavigate();
   const handleBack = () => {
     navigate("/");
   };
+  const { loginContext } = useContext(UserContext);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowLoading, setIsShowLoading] = useState(false);
-  useEffect(() => {
-    let token = localStorage.getItem("token");
-    if (token) {
-      navigate("/");
-    }
-  }, []);
+
   const handleLogin = async () => {
     if (!email) {
       toast.error("Invalid email!");
@@ -31,7 +29,7 @@ const Login = () => {
     setIsShowLoading(true);
     let res = await loginAPI(email, password);
     if (res && res.token) {
-      localStorage.setItem("token", res.token);
+      loginContext(email, res.token);
       toast.success("Login successfully!");
       navigate("/");
     } else {
