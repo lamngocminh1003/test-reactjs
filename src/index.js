@@ -7,12 +7,14 @@ import "react-toastify/dist/ReactToastify.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { BrowserRouter } from "react-router-dom";
 import { UserProvider } from "../src/context/UserContext";
-
+import Error from "./components/ErrorBoundary/Error";
 ReactDOM.render(
   <React.StrictMode>
     <UserProvider>
       <BrowserRouter>
-        <App />
+        <Error>
+          <App />
+        </Error>
       </BrowserRouter>
     </UserProvider>
   </React.StrictMode>,

@@ -10,7 +10,6 @@ import { UserContext } from "../context/UserContext";
 const Header = (props) => {
   const navigate = useNavigate();
   const { logout, user } = useContext(UserContext);
-
   const handleLogOut = () => {
     logout();
     navigate("/");
