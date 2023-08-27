@@ -3,19 +3,26 @@ import { loginAPI } from "./Services/UserService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
-
+import { handleLoginRedux } from "../redux/action/userAction";
+import { useDispatch, useSelector } from "react-redux";
 const Login = () => {
   const navigate = useNavigate();
   const handleBack = () => {
     navigate("/");
   };
-  const { loginContext } = useContext(UserContext);
-
+  // const { loginContext } = useContext(UserContext);
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isShowPassword, setIsShowPassword] = useState(false);
-  const [isShowLoading, setIsShowLoading] = useState(false);
-
+  // const [isShowLoading, setIsShowLoading] = useState(false);
+  const isLoading = useSelector((state) => state.user.isLoading);
+  const account = useSelector((state) => state.user.account);
+  useEffect(() => {
+    if (account && account.auth === true) {
+      navigate("/");
+    }
+  }, [account]);
   const handleLogin = async () => {
     if (!email) {
       toast.error("Invalid email!");
@@ -26,18 +33,19 @@ const Login = () => {
     if (!email && !password) {
       toast.error("Invalid email & password!");
     }
-    setIsShowLoading(true);
-    let res = await loginAPI(email.replace(), password);
-    if (res && res.token) {
-      loginContext(email, res.token);
-      toast.success("Login successfully!");
-      navigate("/");
-    } else {
-      if (res && res.status === 400) {
-        toast.error(res.data.error);
-      }
-    }
-    setIsShowLoading(false);
+    // setIsShowLoading(true);
+    dispatch(handleLoginRedux(email, password));
+    // let res = await loginAPI(email.replace(), password);
+    // if (res && res.token) {
+    //   loginContext(email, res.token);
+    //   toast.success("Login successfully!");
+    //   navigate("/");
+    // } else {
+    //   if (res && res.status === 400) {
+    //     toast.error(res.data.error);
+    //   }
+    // }
+    // setIsShowLoading(false);
   };
   const handlePressEnter = (event) => {
     if (event && event.keyCode === 13) {
@@ -83,7 +91,7 @@ const Login = () => {
             ></i>
           </div>
         </div>
-        {isShowLoading && (
+        {isLoading && (
           <div className="fa-2x d-flex justify-content-center m-3 text-info">
             {" "}
             <i className="fas fa-spinner fa-pulse "></i>
